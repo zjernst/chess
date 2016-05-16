@@ -12,6 +12,19 @@ class Display
     @cursor_pos = [0, 0]
   end
 
+  def move
+    next_move = []
+    @selected = nil
+
+    until next_move.compact.size == 2
+      render
+
+      next_move << get_input
+      @selected = next_move.last unless next_move.last.nil?
+    end
+    board.move(*next_move.compact)
+  end
+
   def build_grid
     @board.rows.map.with_index do |row, i|
       build_row(row, i)
@@ -26,7 +39,7 @@ class Display
   end
 
   def colors_for(i, j)
-    if [i, j] == @cursor_pos
+    if [i, j] == @cursor_pos || [i, j] == @selected
       bg = :light_red
     elsif (i + j).odd?
       bg = :light_blue
