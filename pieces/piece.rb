@@ -1,5 +1,5 @@
 class Piece
-  
+
   attr_accessor :current_pos
   attr_reader :board, :color
 
@@ -21,6 +21,14 @@ class Piece
 
   def to_s
     " X "
+  end
+
+  def out_of_bounds?(pos)
+    pos.any? { |x| !x.between?(0, 7) }
+  end
+
+  def friendly_piece?(pos)
+    board[pos].color == color
   end
 end
 

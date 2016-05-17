@@ -1,6 +1,6 @@
 require 'byebug'
 
-module Movement
+module SlidingMovement
   # @deltas = []
   def moves
     moves = []
@@ -46,8 +46,19 @@ module Movement
     board[pos].color != color
   end
 
-  def out_of_bounds?(pos)
-    pos.any? { |x| !x.between?(0, 7) }
+  # def out_of_bounds?(pos)
+  #   pos.any? { |x| !x.between?(0, 7) }
+  # end
+end
+
+module SteppingMovement
+  def moves
+    @deltas.each_with_object([]) do |delta, move|
+      new_move = delta.tuple_plus(@current_pos)
+      unless out_of_bounds?(new_move) || friendly_piece?(new_move)
+        move << new_move
+      end
+    end
   end
 end
 

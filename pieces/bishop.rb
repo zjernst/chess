@@ -1,9 +1,9 @@
 require_relative 'piece'
 require 'byebug'
-# require_relative Movement
+# require_relative SlidingMovement
 
 class Bishop < Piece
-  include Movement
+  include SlidingMovement
 
   attr_accessor :current_pos
   # include DiagonalMove

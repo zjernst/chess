@@ -1,8 +1,8 @@
 # require_relative 'piece'
-# require_relative Movement
+# require_relative SlidingMovement
 
 class Rook < Piece
-  include Movement
+  include SlidingMovement
 
   attr_accessor :current_pos
 
