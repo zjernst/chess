@@ -1,7 +1,6 @@
 class Piece
 
-  attr_accessor :current_pos
-  attr_reader :board, :color
+  attr_reader :board, :color, :current_pos
 
   DIAGONALS = [[1,1],[-1,-1],[1,-1],[-1,1]]
   RECTILINEAR = [[1,0],[-1,0],[0,1],[0,-1]]
@@ -10,6 +9,7 @@ class Piece
     @current_pos = starting_pos
     @color = color
     @board = board
+    @first_move = true
   end
 
   class InvalidMoveError < RuntimeError
@@ -17,6 +17,11 @@ class Piece
     def initialize
       @message = "Cannot move there"
     end
+  end
+
+  def current_pos=(new_pos)
+    @current_pos = new_pos
+    @first_move = false
   end
 
   def to_s
@@ -28,7 +33,15 @@ class Piece
   end
 
   def friendly_piece?(pos)
-    board[pos].color == color
+    board[pos].color == color unless board.empty?(pos)
+  end
+
+  def bad_move?(pos)
+    friendly_piece?(pos) || out_of_bounds(pos)
+  end
+
+  def enemy_piece?(pos)
+    board[pos].color != color unless board.empty?(pos)
   end
 end
 

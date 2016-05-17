@@ -14,7 +14,7 @@ module SlidingMovement
         if out_of_bounds?(next_pos)
           finished_moving = true
 
-        elsif board[next_pos].is_a?(NullPiece)
+        elsif board.empty?(next_pos)
           new_moves << next_pos
           next_pos = delta.tuple_plus(new_moves.last)
         elsif enemy_piece?(next_pos)
@@ -32,7 +32,7 @@ module SlidingMovement
   end
 
   # def parse_move(next_pos, new_moves)
-  #   if board[next_pos].is_a?(NullPiece)
+  #   if board[next_pos].empty?
   #     new_moves << next_pos
   #   elsif enemy_piece?(board[next_pos])
   #     new_moves << next_pos
@@ -42,9 +42,7 @@ module SlidingMovement
   #   end
   # end
 
-  def enemy_piece?(pos)
-    board[pos].color != color
-  end
+
 
   # def out_of_bounds?(pos)
   #   pos.any? { |x| !x.between?(0, 7) }
@@ -55,7 +53,7 @@ module SteppingMovement
   def moves
     @deltas.each_with_object([]) do |delta, move|
       new_move = delta.tuple_plus(@current_pos)
-      unless out_of_bounds?(new_move) || friendly_piece?(new_move)
+      unless bad_move?(new_move)
         move << new_move
       end
     end

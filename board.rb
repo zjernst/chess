@@ -10,7 +10,7 @@ class Board
   end
 
   def valid_move?(start, endd)
-    self[start].path(endd).all? { |pos| self[pos].is_a?(NullPiece) }
+    self[start].path(endd).all? { |pos| self[pos].empty? }
   end
 
   def move(start, end_pos)
@@ -42,5 +42,9 @@ class Board
 
   def rows
     @grid
+  end
+
+  def empty?(pos)
+    self[pos].is_a?(NullPiece)
   end
 end
