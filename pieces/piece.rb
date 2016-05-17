@@ -1,6 +1,7 @@
 class Piece
 
-  attr_reader :board, :color, :current_pos
+  attr_reader :color, :current_pos
+  attr_accessor :board
 
   DIAGONALS = [[1,1],[-1,-1],[1,-1],[-1,1]]
   RECTILINEAR = [[1,0],[-1,0],[0,1],[0,-1]]
@@ -37,7 +38,7 @@ class Piece
   end
 
   def bad_move?(pos)
-    friendly_piece?(pos) || out_of_bounds(pos)
+    friendly_piece?(pos) || out_of_bounds?(pos)
   end
 
   def enemy_piece?(pos)

@@ -4,4 +4,8 @@ class King < Piece
     super
     @deltas = DIAGONALS + RECTILINEAR
   end
+
+  def to_s
+    " K "
+  end
 end

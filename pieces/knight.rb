@@ -4,4 +4,8 @@ class Knight < Piece
     super
     @deltas = [[2,1],[2,-1],[1,2],[1,-2],[-1,2],[-1,-2],[-2,1],[-2,-1]]
   end
+
+  def to_s
+    "Kn "
+  end
 end

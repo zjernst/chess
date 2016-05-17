@@ -26,5 +26,9 @@ class Pawn < Piece
     moves
   end
 
+  def to_s
+    " P "
+  end
+
 
 end
