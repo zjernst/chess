@@ -1,4 +1,4 @@
-require_relative 'pieces'
+require_relative 'pieces/piece'
 require_relative 'display'
 
 class Board
