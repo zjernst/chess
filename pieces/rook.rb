@@ -1,11 +1,13 @@
-require_relative 'piece'
-require_relative 'movement_module'
+# require_relative 'piece'
+# require_relative Movement
 
-class Rook < SlidingPiece
+class Rook < Piece
+  include Movement
+
   attr_accessor :current_pos
-  include HorizontalMove
 
-  def initialize(color, current_pos)
+  def initialize(color, current_pos, board)
+    @deltas = RECTILINEAR
     super
   end
 

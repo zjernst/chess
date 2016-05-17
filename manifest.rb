@@ -1,3 +1,5 @@
+require_relative 'pieces/movement_module'
+require_relative 'pieces/piece'
 require_relative 'board'
 require_relative 'pieces/queen'
 require_relative 'pieces/bishop'

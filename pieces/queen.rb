@@ -1,12 +1,12 @@
-require_relative 'piece'
-require_relative 'movement_module'
+# require_relative 'piece'
+# require_relative Movement
 
-class Queen < SlidingPiece
-  DELTA = DIAGONALS + RECTILINEAR
-  include 'movement'
+class Queen < Piece
+  include Movement
 
-  def initialize(color, current_pos)
+  def initialize(color, current_pos, board)
     super
+    @deltas = DIAGONALS + RECTILINEAR
   end
 
 

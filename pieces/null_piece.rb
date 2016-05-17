@@ -2,7 +2,7 @@ require 'singleton'
 
 class NullPiece
 
-  include 'singleton'
+  include Singleton
 
   class InvalidMoveError < RuntimeError
     def initialize

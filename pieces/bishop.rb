@@ -1,14 +1,16 @@
-# require_relative 'piece'
-# require_relative 'movement_module'
+require_relative 'piece'
+require 'byebug'
+# require_relative Movement
 
-class Bishop < SlidingPiece
-  include 'movement'
-  DELTA = DIAGONALS
+class Bishop < Piece
+  include Movement
+
   attr_accessor :current_pos
-  include DiagonalMove
+  # include DiagonalMove
 
 
-  def initialize(color, current_pos)
+  def initialize(color, current_pos, board)
+    @deltas = Piece::DIAGONALS
     super
   end
 

@@ -1,17 +1,23 @@
+require 'byebug'
+
 module Movement
+  # @deltas = []
   def moves
     moves = []
-    DELTA.each do |delta|
+    @deltas.each do |delta|
       finished_moving = false
       next_pos = @current_pos.tuple_plus(delta)
       new_moves = []
 
       until finished_moving
 
-        if board[next_pos].is_a?(NullPiece)
+        if out_of_bounds?(next_pos)
+          finished_moving = true
+
+        elsif board[next_pos].is_a?(NullPiece)
           new_moves << next_pos
           next_pos = delta.tuple_plus(new_moves.last)
-        elsif enemy_piece?(board[next_pos])
+        elsif enemy_piece?(next_pos)
           new_moves << next_pos
           finished_moving = true
         else
@@ -19,34 +25,40 @@ module Movement
         end
 
       end
-      moves << new_moves
+      moves += new_moves
     end
+    moves
 
   end
 
-  def parse_move(next_pos, new_moves)
-    if board[next_pos].is_a?(NullPiece)
-      new_moves << next_pos
-    elsif enemy_piece?(board[next_pos])
-      new_moves << next_pos
-      finished_moving = true
-    else
-      finished_moving = true
-    end
-  end
-end
-
-  def in_bounds?(pos)
-    pos.all? { |x| x.between?(0, 7) }
-  end
+  # def parse_move(next_pos, new_moves)
+  #   if board[next_pos].is_a?(NullPiece)
+  #     new_moves << next_pos
+  #   elsif enemy_piece?(board[next_pos])
+  #     new_moves << next_pos
+  #     finished_moving = true
+  #   else
+  #     finished_moving = true
+  #   end
+  # end
 
   def enemy_piece?(pos)
     board[pos].color != color
   end
 
-  def friendly_piece?
-    board[pos].color == color
+  def out_of_bounds?(pos)
+    pos.any? { |x| !x.between?(0, 7) }
   end
+end
+
+
+  # def enemy_piece?(pos)
+  #   board[pos].color != color
+  # end
+  #
+  # def friendly_piece?
+  #   board[pos].color == color
+  # end
 
 
 
