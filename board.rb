@@ -6,7 +6,7 @@ class Board
   attr_accessor :grid
 
   def initialize
-    @grid = Array.new(8) {Array.new(8) {NullPiece.new}}
+    @grid = Array.new(8) {Array.new(8) {NullPiece.instance}}
   end
 
   def valid_move?(start, endd)

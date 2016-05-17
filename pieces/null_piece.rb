@@ -1,5 +1,8 @@
+require 'singleton'
 
 class NullPiece
+
+  include 'singleton'
 
   class InvalidMoveError < RuntimeError
     def initialize
