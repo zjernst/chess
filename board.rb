@@ -9,13 +9,21 @@ class Board
     @grid = Array.new(8) {Array.new(8) {NullPiece.new}}
   end
 
+  def valid_move?(start, endd)
+    self[start].path(endd).all? { |pos| self[pos].is_a?(NullPiece) }
+  end
+
   def move(start, end_pos)
   #   prompt
   #   self[start].valid_move?
   # rescue RuntimeError => e
   #   e.message
-  #   retry
-    self[end_pos], self[start] = self[start], NullPiece.new
+  #   retr
+    if valid_move?(start, endd)
+      self[end_pos], self[start] = self[start], NullPiece.new
+      self[end_pos].current_pos = end_pos
+    end
+
   end
 
   def in_bounds?(pos)
