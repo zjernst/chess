@@ -41,6 +41,12 @@ class Board
     false
   end
 
+  def check_player?(player)
+    player.pieces.each do |piece|
+      piece.moves.each { |move| return true if self[move].is_a?(King) }
+    end
+  end
+
   def move(start, end_pos)
   #   prompt
   #   self[start].valid_move?

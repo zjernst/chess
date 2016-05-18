@@ -16,9 +16,11 @@ class Chess
     "king" => King
   }
 
-  attr_reader :board
+  attr_reader :board, :player_w, :player_b
 
   def initialize
+    @player_w = Player.new("White", :white)
+    @player_b = Player.new("Black", :black)
     @board = setup
   end
 
@@ -35,7 +37,13 @@ class Chess
     CLASSES.each do |piece, type|
       POSITIONS[piece].each do |position|
         color = position[0] == 0 ? :black : :white
-        board[position] = type.new(color, position, board)
+        current_piece = type.new(color, position, board)
+        board[position] = current_piece
+        if color == :white
+          @player_w.pieces << current_piece
+        else
+          @player_b.pieces << current_piece
+        end
       end
     end
   end
