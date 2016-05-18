@@ -22,7 +22,9 @@ class Display
       next_move << get_input
       @selected = next_move.last unless next_move.last.nil?
     end
-    board.move(*next_move.compact)
+    proposed_move = next_move.compact!
+
+    board.move(*next_move.compact) if board.valid_move?(*proposed_move)
   end
 
   def build_grid

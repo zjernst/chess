@@ -47,3 +47,4 @@ class Chess
     end
     board
   end
+end

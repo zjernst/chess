@@ -10,8 +10,16 @@ class Board
     @grid = grid || Array.new(8) {Array.new(8) {NullPiece.instance}}
   end
 
-  def valid_move?(start, endd)
-    self[start].path(endd).all? { |pos| self[pos].empty? }
+  def valid_move?(start, stop)
+    byebug
+
+    duplicate_board = deep_dup
+    return false unless duplicate_board[start].moves.include?(stop)
+
+    current_color = self[start].color
+
+    duplicate_board.move(start, stop)
+    !duplicate_board.check?(current_color)
   end
 
   def check?(color)
@@ -20,6 +28,8 @@ class Board
     (0..7).each do |x|
       (0..7).each do |y|
         pos = [x,y]
+
+        next if self.empty?(pos)
 
         piece = self[pos]
         if piece.color == enemy

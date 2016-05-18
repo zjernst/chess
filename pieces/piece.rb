@@ -34,7 +34,7 @@ class Piece
   end
 
   def friendly_piece?(pos)
-    board[pos].color == color unless board.empty?(pos)
+    board[pos].color == color
   end
 
   def bad_move?(pos)
@@ -42,7 +42,7 @@ class Piece
   end
 
   def enemy_piece?(pos)
-    board[pos].color != color unless board.empty?(pos)
+    board[pos].color != color
   end
 end
 
